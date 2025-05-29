@@ -1,0 +1,17 @@
+{
+    "name": "vira/vira",
+    "description": "an online bookstore built with php",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Vira\\Vira\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "sinshr",
+            "email": "98868456+sinnshr@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
