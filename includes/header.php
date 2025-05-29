@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <header class="text-white p-2 sticky top-0" style="background-color: #5F6F52; transition: padding 0.4s cubic-bezier(.4,2,.6,1);" id="header">
+    <header class="text-white p-2 sticky top-0" style="background-color: #5F6F52; transition: padding 0.4s cubic-bezier(.4,2,.6,1); z-index: 1000;" id="header">
         <nav class="container mx-auto flex justify-center items-center gap-x-12" style="position: relative;">
             <ul class="flex space-x-10 space-x-reverse items-center m-0 p-0">
                 <li>

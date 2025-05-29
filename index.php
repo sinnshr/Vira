@@ -3,49 +3,109 @@ $pageTitle = "ویرا - هر صفحه یک جهان";
 ob_start();
 ?>
 <style>
-    body{
-        margin: 0;
-        padding: 0;
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
-    .curve {
-        --mask:
-            radial-gradient(245.97px at 50% calc(100% - 330px),#000 99%,#0000 101%) calc(50% - 220px) 0/440px 100%,
-            radial-gradient(245.97px at 50% calc(100% + 220px),#0000 99%,#000 101%) 50% calc(100% - 110px)/440px 100% repeat-x;
-        -webkit-mask: var(--mask);
-                mask: var(--mask);
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
+.animate {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.animate.active {
+    animation: fade 1s ease-out both;
+    opacity: 1;
+}
 </style>
 
-<section class=" w-100 m-0 flex flex-col items-center justify-center py-12 px-4" style="background-color: #FEFAE0; min-height: 40vh;">
-    <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold text-[#5F6F52] mb-4 pt-12 text-center">ویرا - هر صفحه، یک جهان</h1>
-    <p class="text-base md:text-lg mb-6 text-center max-w-2xl text-[#5F6F52]">
+<section class="w-full min-h-screen flex flex-col items-center justify-center py-6 px-4" style="background-color: #FEFAE0;">
+    <h1 class="md:text-4xl lg:text-6xl font-bold text-[#5F6F52] mb-4 pt-4 text-center">ویرا - هر صفحه، یک جهان</h1>
+    <p class="text-base md:text-lg mb-6 text-center max-w-3xl text-[#5F6F52]">
         ویرا کتاب‌فروشی آنلاین شماست. دنیایی از کتاب‌های متنوع، با ارسال سریع و پشتیبانی بیست‌وچهار ساعته. همین حالا کتاب مورد علاقه‌تان را جستجو و خرید کنید!
     </p>
     <button onclick="window.location.href='books.php'" class="inline-block bg-[#B99470] hover:bg-[#A9743C] text-white font-bold py-3 px-8 rounded-lg shadow transition">
         جستجوی کتاب‌ها
     </button>
+    <div id="lottie-animation" style="width:250px; height:200px; z-index: 30;" class="flex justify-center my-0 py-0"></div>
 </section>
 
-<div class="curve"></div>
+<div style="width:100%; margin-top:-40px; line-height:0; background-color: #FEFAE0">
+    <svg viewBox="0 0 1440 100" width="100%" height="100" preserveAspectRatio="none" style="display:block;">
+        <path d="M0,80 C480,120 960,0 1440,80 L1440,100 L0,100 Z" fill="#A9B388"/>
+    </svg>
+</div>
 
-
-<section class="container mx-auto mb-12 mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
-    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-        <i class="fas fa-book-open fa-3x text-green-700 mb-4"></i>
+<section class="w-full py-12 px-8 grid grid-cols-1 md:grid-cols-3 gap-10 bg-[#A9B388]">
+    <div class="bg-white rounded-lg shadow p-7 flex flex-col items-center animate" style="animation-delay: 0.1s;">
+        <i class="fas fa-book fa-3x text-[#B99470] mb-4"></i>
         <h2 class="text-xl font-bold mb-2">تنوع بی‌نظیر کتاب‌ها</h2>
         <p class="text-gray-700 text-center">دسترسی به صدها عنوان کتاب در موضوعات مختلف برای همه سلیقه‌ها.</p>
     </div>
-    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-        <i class="fas fa-truck fa-3x text-green-700 mb-4"></i>
+    <div class="bg-white rounded-lg shadow p-7 flex flex-col items-center animate" style="animation-delay: 0.3s;">
+        <i class="fas fa-truck fa-3x text-[#B99470] mb-4"></i>
         <h2 class="text-xl font-bold mb-2">ارسال سریع</h2>
         <p class="text-gray-700 text-center">تحویل سریع و مطمئن کتاب‌ها به سراسر کشور.</p>
     </div>
-    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-        <i class="fas fa-headset fa-3x text-green-700 mb-4"></i>
+    <div class="bg-white rounded-lg shadow p-7 flex flex-col items-center animate" style="animation-delay: 0.5s;">
+        <i class="fas fa-headset fa-3x text-[#B99470] mb-4"></i>
         <h2 class="text-xl font-bold mb-2">پشتیبانی ۲۴ ساعته</h2>
         <p class="text-gray-700 text-center">تیم پشتیبانی ما همیشه آماده پاسخگویی به سوالات شماست.</p>
     </div>
-</section>
+    </section>
+
+    <div style="width:100%; margin-top:-40px; line-height:0; background-color: #A9B388">
+        <svg viewBox="0 0 1440 100" width="100%" height="100" preserveAspectRatio="none" style="display:block;">
+            <path d="M0,80 C480,120 960,0 1440,80 L1440,100 L0,100 Z" fill="#FEFAE0"/>
+        </svg>
+    </div>
+
+    <section class="w-full py-10 px-4 bg-[#FEFAE0] flex flex-col md:flex-row items-start md:items-center justify-between">
+        <div class="flex-1">
+            <h2 class="text-2xl font-bold mb-4 text-[#5F6F52] mx-12 px-12">با ارسال نظر، به پیشرفت ما کمک کنید.</h2>
+            <form method="post" action="" class="w-full max-w-xl bg-[#A9B388] rounded-lg shadow p-6 mb-6 mx-12 ps-12">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="username">نام شما:</label>
+                    <input type="text" id="username" name="username" required class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470]">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="comment">نظر شما:</label>
+                    <textarea id="comment" name="comment" rows="3" required class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470]"></textarea>
+                </div>
+                <button type="submit" class="bg-[#B99470] hover:bg-[#A9743C] text-white font-bold py-2 px-6 rounded transition">ارسال نظر</button>
+            </form>
+        </div>
+        <div class="flex justify-center items-center w-full md:w-auto mt-6 md:mt-0">
+            <img src="assets/img/comment.png" alt="comment" class="max-w-lg w-full h-auto" style="max-width:600px;">
+        </div>
+    </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+    lottie.loadAnimation({
+        container: document.getElementById('lottie-animation'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'assets/img/animation.json'
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const animatedElements = document.querySelectorAll('.animate');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        animatedElements.forEach(el => observer.observe(el));
+    });
+</script>
 
 <?php
 $content = ob_get_clean();
