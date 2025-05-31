@@ -10,6 +10,6 @@ if (isset($_POST['book_id'])) {
     } else {
         $_SESSION['cart'][$book_id] = 1;
     }
-    header("Location: pages/cart.php");
+    header("Location: public/cart.php");
 }
 ?>

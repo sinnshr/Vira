@@ -8,7 +8,7 @@ define('DB_USER', 'your_username');
 define('DB_PASS', 'your_password');
 
 // Base URL of the application
-define('BASE_URL', 'http://yourdomain.com/online-bookstore/public/');
+// define('BASE_URL', 'http://yourdomain.com/online-bookstore/public/');
 
 // Other constants
 define('SITE_NAME', 'کتابفروشی آنلاین');

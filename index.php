@@ -1,5 +1,6 @@
 <?php
 $pageTitle = "ویرا - هر صفحه یک جهان";
+include_once __DIR__ . '/route.php';
 ob_start();
 ?>
 <style>
@@ -28,7 +29,7 @@ ob_start();
     <p class="text-base md:text-lg mb-6 text-center max-w-3xl text-[#5F6F52]">
         ویرا کتاب‌فروشی آنلاین شماست. دنیایی از کتاب‌های متنوع، با ارسال سریع و پشتیبانی بیست‌وچهار ساعته. همین حالا کتاب مورد علاقه‌تان را جستجو و خرید کنید!
     </p>
-    <button onclick="window.location.href='books.php'" class="inline-block bg-[#B99470] hover:bg-[#A9743C] text-white font-bold py-3 px-8 rounded-lg shadow transition">
+    <button onclick="window.location.href='<?php echo $routes['books']; ?>'" class="inline-block bg-[#B99470] hover:bg-[#A9743C] text-white font-bold py-3 px-8 rounded-lg shadow transition">
         جستجوی کتاب‌ها
     </button>
     <div id="lottie-animation" style="width:250px; height:200px; z-index: 30;" class="flex justify-center my-0 py-0"></div>

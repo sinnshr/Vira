@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header("Location: pages/login.php");
+    header("Location: public/login.php");
     exit;
 }
 unset($_SESSION['cart']);

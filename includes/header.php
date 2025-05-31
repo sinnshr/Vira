@@ -1,3 +1,6 @@
+<?php
+include_once __DIR__ . '/../route.php';
+?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -6,10 +9,11 @@
     <title>ویرا - هر صفحه یک جهان</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- <link rel="icon" type="image/x-icon" href="/favicon.png"> -->
     <style>
         @font-face {
             font-family: 'Dana';
-            src: url='/fonts/DANA-MEDIUM.TTF' format('truetype');
+            src: url('fonts/DANA-MEDIUM.TTF') format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -24,12 +28,12 @@
         <nav class="container mx-auto flex justify-center items-center gap-x-12" style="position: relative;">
             <ul class="flex space-x-10 space-x-reverse items-center m-0 p-0">
                 <li>
-                    <a href="books.php" title="کتاب‌ها">
+                    <a href="<?php echo $routes['books']; ?>" title="کتاب‌ها">
                         <i class="fas fa-book fa-xl text-black"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="cart.php" title="سبد خرید">
+                    <a href="<?php echo $routes['cart']; ?>" title="سبد خرید">
                         <i class="fas fa-shopping-cart fa-xl text-black"></i>
                     </a>
                 </li>
@@ -50,32 +54,31 @@
                     margin-bottom: -50px;
                     transition: transform 0.4s cubic-bezier(.4,2,.6,1), opacity 0.3s;
                 ">
-                <!-- Curve background only -->
             </div>
-            <a id="logo-link" href="index.php"
+            <a id="logo-link" href="/index.php"
                style="display: flex; justify-content: center; align-items: center; position: absolute; left: 50%; top: 10px; transform: translateX(-50%) translateY(0); z-index: 30; transition: top 0.4s cubic-bezier(.4,2,.6,1), transform 0.4s cubic-bezier(.4,2,.6,1);">
-                <img src="assets/img/logo.png" alt="ویرا" style="height: 80px; object-fit: contain;">
+                <img src="/logo.png" alt="ویرا" style="height: 80px; object-fit: contain;">
             </a>
             <ul class="flex space-x-10 space-x-reverse items-center m-0 p-0">
-                <?php if (isset($_SESSION['user_id'])): ?>
+                <?php if (isset($_SESSION['id'])): ?>
                     <li>
-                        <a href="profile.php" title="پروفایل">
+                        <a href="<?php echo $routes['profile']; ?>" title="پروفایل">
                             <i class="fas fa-user fa-xl text-black"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="logout.php" title="خروج">
+                        <a href="<?php echo $routes['logout']; ?>" title="خروج">
                             <i class="fas fa-sign-out-alt fa-xl text-black"></i>
                         </a>
                     </li>
                 <?php else: ?>
                     <li>
-                        <a href="public/login.php" title="ورود">
+                        <a href="<?php echo $routes['login']; ?>" title="ورود">
                             <i class="fas fa-sign-in-alt fa-xl text-black"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="about.php" title="درباره ما">
+                        <a href="<?php echo $routes['about']; ?>" title="درباره ما">
                             <i class="fas fa-info-circle fa-xl text-black"></i>
                         </a>
                     </li>
