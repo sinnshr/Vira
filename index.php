@@ -1,43 +1,57 @@
 <?php
 $pageTitle = "ویرا - هر صفحه یک جهان";
 include_once __DIR__ . '/route.php';
+
+$commentSuccess = null;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['comment'])) {
+    require_once __DIR__ . '/src/comment.php';
+    $commentSuccess = addComment();
+}
+
 ob_start();
 ?>
 <style>
-@keyframes fade {
-    from {
+    @keyframes fade {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate {
         opacity: 0;
-        transform: translateY(30px);
+        transition: opacity 0.3s;
     }
-    to {
+
+    .animate.active {
+        animation: fade 1s ease-out both;
         opacity: 1;
-        transform: translateY(0);
     }
-}
-.animate {
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-.animate.active {
-    animation: fade 1s ease-out both;
-    opacity: 1;
-}
 </style>
 
-<section class="w-full min-h-screen flex flex-col items-center justify-center py-6 px-4" style="background-color: #FEFAE0;">
+<section class="w-full min-h-screen flex flex-col items-center justify-center py-6 px-4"
+    style="background-color: #FEFAE0;">
     <h1 class="md:text-4xl lg:text-6xl font-bold text-[#5F6F52] mb-4 pt-4 text-center">ویرا - هر صفحه، یک جهان</h1>
     <p class="text-base md:text-lg mb-6 text-center max-w-3xl text-[#5F6F52]">
-        ویرا کتاب‌فروشی آنلاین شماست. دنیایی از کتاب‌های متنوع، با ارسال سریع و پشتیبانی بیست‌وچهار ساعته. همین حالا کتاب مورد علاقه‌تان را جستجو و خرید کنید!
+        ویرا کتاب‌فروشی آنلاین شماست. دنیایی از کتاب‌های متنوع، با ارسال سریع و پشتیبانی بیست‌وچهار ساعته. همین حالا
+        کتاب مورد علاقه‌تان را جستجو و خرید کنید!
     </p>
-    <button onclick="window.location.href='<?php echo $routes['books']; ?>'" class="inline-block bg-[#B99470] hover:bg-[#A9743C] text-white font-bold py-3 px-8 rounded-lg shadow transition">
+    <button onclick="window.location.href='<?php echo $routes['books']; ?>'"
+        class="inline-block bg-[#B99470] hover:bg-[#A9743C] text-white font-bold py-3 px-8 rounded-lg shadow transition">
         جستجوی کتاب‌ها
     </button>
-    <div id="lottie-animation" style="width:250px; height:200px; z-index: 30;" class="flex justify-center my-0 py-0"></div>
+    <div id="lottie-animation" style="width:250px; height:200px; z-index: 30;" class="flex justify-center my-0 py-0">
+    </div>
 </section>
 
 <div style="width:100%; margin-top:-40px; line-height:0; background-color: #FEFAE0">
     <svg viewBox="0 0 1440 100" width="100%" height="100" preserveAspectRatio="none" style="display:block;">
-        <path d="M0,80 C480,120 960,0 1440,80 L1440,100 L0,100 Z" fill="#A9B388"/>
+        <path d="M0,80 C480,120 960,0 1440,80 L1440,100 L0,100 Z" fill="#A9B388" />
     </svg>
 </div>
 
@@ -57,33 +71,50 @@ ob_start();
         <h2 class="text-xl font-bold mb-2">پشتیبانی ۲۴ ساعته</h2>
         <p class="text-gray-700 text-center">تیم پشتیبانی ما همیشه آماده پاسخگویی به سوالات شماست.</p>
     </div>
-    </section>
+</section>
 
-    <div style="width:100%; margin-top:-40px; line-height:0; background-color: #A9B388">
-        <svg viewBox="0 0 1440 100" width="100%" height="100" preserveAspectRatio="none" style="display:block;">
-            <path d="M0,80 C480,120 960,0 1440,80 L1440,100 L0,100 Z" fill="#FEFAE0"/>
-        </svg>
+<div style="width:100%; margin-top:-40px; line-height:0; background-color: #A9B388">
+    <svg viewBox="0 0 1440 100" width="100%" height="100" preserveAspectRatio="none" style="display:block;">
+        <path d="M0,80 C480,120 960,0 1440,80 L1440,100 L0,100 Z" fill="#FEFAE0" />
+    </svg>
+</div>
+
+<section class="w-full py-10 px-4 bg-[#FEFAE0] flex flex-col md:flex-row items-start md:items-center justify-between">
+    <div class="flex-1">
+        <h2 class="text-2xl font-bold mb-4 text-[#5F6F52] mx-1 px-12">با ارسال نظر، به پیشرفت ما کمک کنید.</h2>
+        <form method="post" action="" class="w-full max-w-xl bg-[#A9B388] rounded-lg shadow p-6 mb-6 mx-12 ps-12">
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2" for="name">نام شما:</label>
+                <input type="text" id="name" name="name" required
+                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470]">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2" for="comment">نظر شما:</label>
+                <textarea id="comment" name="comment" rows="3" required
+                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470]"></textarea>
+            </div>
+            <button type="submit"
+                class="bg-[#B99470] hover:bg-[#A9743C] text-white font-bold py-2 px-6 rounded transition">ارسال
+                نظر</button>
+            <?php if (isset($commentSuccess)): ?>
+                <div id="comment-popup" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">
+                    <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full text-center relative">
+                        <button onclick="document.getElementById('comment-popup').style.display='none';"
+                            class="absolute top-2 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold">&times;</button>
+                        <?php if ($commentSuccess === true): ?>
+                            <p class="text-green-600 mt-2">نظر شما با موفقیت ثبت شد.</p>
+                        <?php else: ?>
+                            <p class="text-red-600 mt-2">ثبت نظر با خطا مواجه شد.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </form>
     </div>
-
-    <section class="w-full py-10 px-4 bg-[#FEFAE0] flex flex-col md:flex-row items-start md:items-center justify-between">
-        <div class="flex-1">
-            <h2 class="text-2xl font-bold mb-4 text-[#5F6F52] mx-12 px-12">با ارسال نظر، به پیشرفت ما کمک کنید.</h2>
-            <form method="post" action="" class="w-full max-w-xl bg-[#A9B388] rounded-lg shadow p-6 mb-6 mx-12 ps-12">
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-2" for="username">نام شما:</label>
-                    <input type="text" id="username" name="username" required class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470]">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-2" for="comment">نظر شما:</label>
-                    <textarea id="comment" name="comment" rows="3" required class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470]"></textarea>
-                </div>
-                <button type="submit" class="bg-[#B99470] hover:bg-[#A9743C] text-white font-bold py-2 px-6 rounded transition">ارسال نظر</button>
-            </form>
-        </div>
-        <div class="flex justify-center items-center w-full md:w-auto mt-6 md:mt-0">
-            <img src="assets/img/comment.png" alt="comment" class="max-w-lg w-full h-auto" style="max-width:600px;">
-        </div>
-    </section>
+    <div class="flex justify-center items-center w-full md:w-auto mt-6 md:mt-0">
+        <img src="assets/img/comment.png" alt="comment" class="max-w-lg w-full h-auto" style="max-width:600px;">
+    </div>
+</section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 <script>
@@ -94,7 +125,7 @@ ob_start();
         autoplay: true,
         path: 'assets/img/animation.json'
     });
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const animatedElements = document.querySelectorAll('.animate');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -106,6 +137,10 @@ ob_start();
 
         animatedElements.forEach(el => observer.observe(el));
     });
+    setTimeout(function () {
+        var popup = document.getElementById('comment-popup');
+        if (popup) popup.style.display = 'none';
+    }, 3000);
 </script>
 
 <?php
