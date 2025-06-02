@@ -1,6 +1,5 @@
 <?php
-session_start();
-include '../includes/db.php';
+require_once __DIR__ . '/../src/auth.php';
 include_once __DIR__ . '/../route.php';
 
 $error = '';
@@ -8,28 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM users WHERE username = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows == 1) {
-        $user = $result->fetch_assoc();
-        if (password_verify($password, $user['password'])) {
-            $_SESSION['id'] = $user['id'];
-            header("Location: profile.php");
-            exit;
-        } else {
-            $error = "رمز عبور اشتباه است.";
-        }
+    if (login($username, $password)) {
+        header("Location: books.php");
+        exit;
     } else {
-        $error = "نام کاربری یافت نشد.";
+        $error = "نام کاربری یا رمز عبور اشتباه است.";
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <title>ویرا - ورود به سامانه</title>
@@ -43,14 +31,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-style: normal;
             font-display: swap;
         }
+
         body {
             font-family: 'Dana', 'Tahoma', 'Arial', sans-serif;
         }
     </style>
 </head>
+
 <body class="bg-[#FEFAE0] flex items-center justify-center min-h-screen">
     <div class="bg-[#A9B388] p-8 rounded shadow-md w-full max-w-md">
-        <h1 class="text-3xl font-bold mb-4"><img src="/assets/img/icon.png" alt="ویرا" class="inline-block w-12 h-12 mr-2">ورود</h1>
+        <h1 class="text-3xl font-bold mb-4">
+            <img src="/assets/img/icon.png" alt="ویرا" class="inline-block w-12 h-12 mr-2">
+            ورود
+        </h1>
 
         <!-- error section -->
         <?php if (!empty($error)): ?>
@@ -61,16 +54,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <form method="POST" class="space-y-4">
             <div>
-                <label for="username" class="mb-2 block">نام کاربری</label>
+                <label for="username" class="mb-2 block text-gray-700 font-medium">نام کاربری</label>
                 <input type="text" id="username" name="username" required class="border p-2 w-full rounded">
             </div>
             <div>
-                <label for="password" class="mb-2 block">رمز عبور</label>
+                <label for="password" class="mb-2 block text-gray-700 font-medium">رمز عبور</label>
                 <input type="password" id="password" name="password" required class="border p-2 w-full rounded">
             </div>
-            <button type="submit" class="bg-[#DA8359] text-white p-2 w-full rounded transition-colors duration-200 hover:bg-[#b96b44]">ورود</button>
+            <button type="submit"
+                class="bg-amber-600 hover:bg-amber-700 text-white p-2 w-full rounded transition-colors duration-200">ورود</button>
         </form>
-        <p class="mt-4">حساب کاربری ندارید؟ <a href="<?php echo $routes['register']; ?>" class="text-[#5F6F52] font-bold">ثبت‌نام کنید.</a></p>
+        <p class="mt-4">حساب کاربری ندارید؟ <a href="<?php echo $routes['register']; ?>"
+                class="text-[#5F6F52] font-bold">ثبت‌نام کنید.</a></p>
     </div>
 </body>
+
 </html>
