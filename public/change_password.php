@@ -4,6 +4,11 @@ require_once '../src/auth.php';
 $errors = [];
 $success = false;
 
+if (!isset($_SESSION['id'])) {
+    header('Location: login.php');
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $current_password = $_POST['current_password'] ?? '';
     $new_password = $_POST['new_password'] ?? '';
@@ -12,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($current_password) || empty($new_password) || empty($repeat_password)) {
         $errors[] = 'لطفاً همه فیلدها را پر کنید.';
     } else {
-        $userId = $_SESSION['user_id'] ?? 1; // مقدار فرضی
+        $userId = $_SESSION['id'];
         $hashedPassword = getUserPassword($userId);
 
         if (!$hashedPassword || !password_verify($current_password, $hashedPassword)) {

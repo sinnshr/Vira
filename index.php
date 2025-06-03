@@ -1,6 +1,7 @@
 <?php
 $pageTitle = "ویرا - هر صفحه یک جهان";
 include_once __DIR__ . '/route.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 
 $commentSuccess = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['comment'])) {
@@ -42,7 +43,7 @@ ob_start();
         کتاب مورد علاقه‌تان را جستجو و خرید کنید!
     </p>
     <button onclick="window.location.href='<?php echo $routes['books']; ?>'"
-        class="inline-block bg-[#B99470] hover:bg-[#A9743C] text-white font-bold py-3 px-8 rounded-lg shadow transition">
+        class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-8 rounded-lg shadow transition">
         جستجوی کتاب‌ها
     </button>
     <div id="lottie-animation" style="width:250px; height:200px; z-index: 30;" class="flex justify-center my-0 py-0">
@@ -84,18 +85,21 @@ ob_start();
         <h2 class="text-2xl font-bold mb-4 text-[#5F6F52] mx-1 px-12">با ارسال نظر، به پیشرفت ما کمک کنید.</h2>
         <form method="post" action="" class="w-full max-w-xl bg-[#A9B388] rounded-lg shadow p-6 mb-6 mx-12 ps-12">
             <div class="mb-4">
-                <label class="block text-gray-700 mb-2" for="name">نام شما:</label>
+                <label class="block text-[#FEFAE0] mb-2" for="name">نام شما:</label>
                 <input type="text" id="name" name="name" required
                     class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470]">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 mb-2" for="comment">نظر شما:</label>
+                <label class="block text-[#FEFAE0] mb-2" for="comment">نظر شما:</label>
                 <textarea id="comment" name="comment" rows="3" required
                     class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470]"></textarea>
             </div>
-            <button type="submit"
-                class="bg-[#B99470] hover:bg-[#A9743C] text-white font-bold py-2 px-6 rounded transition">ارسال
-                نظر</button>
+            <div class="flex justify-end">
+                <button type="submit"
+                    class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded transition">
+                    ارسال نظر
+                </button>
+            </div>
             <?php if (isset($commentSuccess)): ?>
                 <div id="comment-popup" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">
                     <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full text-center relative">
@@ -111,7 +115,7 @@ ob_start();
             <?php endif; ?>
         </form>
     </div>
-    <div class="flex justify-center items-center w-full md:w-auto mt-6 md:mt-0">
+    <div class="flex justify-center items-center w-full me-10 md:w-auto mt-6 md:mt-0">
         <img src="assets/img/comment.png" alt="comment" class="max-w-lg w-full h-auto" style="max-width:600px;">
     </div>
 </section>
@@ -140,7 +144,7 @@ ob_start();
     setTimeout(function () {
         var popup = document.getElementById('comment-popup');
         if (popup) popup.style.display = 'none';
-    }, 3000);
+    }, 2000);
 </script>
 
 <?php
