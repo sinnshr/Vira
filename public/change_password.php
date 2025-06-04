@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+include_once __DIR__ . '/../includes/helper.php';
 ?>
 
 <!DOCTYPE html>
@@ -45,8 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <title>تغییر رمز عبور</title>
+    <title>ویرا - تغییر رمز عبور</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @font-face {
             font-family: 'Dana';
@@ -83,18 +85,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="post" class="space-y-5">
             <div>
                 <label class="block mb-1 text-gray-700 font-medium" for="current_password">رمز عبور فعلی</label>
-                <input type="password" id="current_password" name="current_password" required
-                    class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <div class="flex justify-center items-center">
+                    <input type="password" id="password" name="password" required
+                        class="border-none p-2 w-full rounded-r focus:outline-none">
+                    <div class="bg-white flex items-center px-3 rounded-l" style="height: 40px;">
+                        <button type="button" class="focus:outline-none" onclick="seePassword('password', 'icon')">
+                            <i class="fa-regular fa-eye text-[#5F6F52] text-lg" id="icon" title="مشاهده رمز عبور"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             <div>
                 <label class="block mb-1 text-gray-700 font-medium" for="new_password">رمز عبور جدید</label>
-                <input type="password" id="new_password" name="new_password" required
-                    class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <div class="flex justify-center items-center">
+                    <input type="password" id="new_password" name="new_password" required
+                        class="border-none p-2 w-full rounded-r focus:outline-none">
+                    <div class="bg-white flex items-center px-3 rounded-l" style="height: 40px;">
+                        <button type="button" class="focus:outline-none" onclick="seePassword('new_password', 'icon_new')">
+                            <i class="fa-regular fa-eye text-[#5F6F52] text-lg" id="icon_new" title="مشاهده رمز عبور"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             <div>
                 <label class="block mb-1 text-gray-700 font-medium" for="repeat_password">تکرار رمز عبور جدید</label>
-                <input type="password" id="repeat_password" name="repeat_password" required
-                    class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <div class="flex justify-center items-center">
+                    <input type="password" id="repeat_password" name="repeat_password" required
+                        class="border-none p-2 w-full rounded-r focus:outline-none">
+                    <div class="bg-white flex items-center px-3 rounded-l" style="height: 40px;">
+                        <button type="button" class="focus:outline-none"
+                            onclick="seePassword('repeat_password', 'icon_repeat')">
+                            <i class="fa-regular fa-eye text-[#5F6F52] text-lg" id="icon_repeat"
+                                title="مشاهده رمز عبور"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             <button type="submit"
                 class="w-full bg-amber-600 hover:bg-amber-700 text-white py-2 rounded  transition">تغییر

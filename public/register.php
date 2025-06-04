@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
+include_once __DIR__ . '/../includes/helper.php';
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -46,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>ویرا - ثبت‌نام</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @font-face {
             font-family: 'Dana';
@@ -81,12 +83,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div>
                 <label for="password" class="mb-2 block text-gray-700 font-medium">رمز عبور</label>
-                <input type="password" id="password" name="password" required class="border p-2 w-full rounded">
+                <div class="flex justify-center items-center">
+                    <input type="password" id="password" name="password" required
+                        class="border-none p-2 w-full rounded-r focus:outline-none">
+                    <div class="bg-white flex items-center px-3 rounded-l" style="height: 40px;">
+                        <button type="button" class="focus:outline-none" onclick="seePassword('password', 'icon')">
+                            <i class="fa-regular fa-eye text-[#5F6F52] text-lg" id="icon" title="مشاهده رمز عبور"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             <div>
                 <label for="password_repeat" class="mb-2 block text-gray-700 font-medium">تکرار رمز عبور</label>
-                <input type="password" id="password_repeat" name="password_repeat" required
-                    class="border p-2 w-full rounded">
+                <div class="flex justify-center items-center">
+                    <input type="password" id="password_repeat" name="password_repeat" required
+                        class="border-none p-2 w-full rounded-r focus:outline-none">
+                    <div class="bg-white flex items-center px-3 rounded-l" style="height: 40px;">
+                        <button type="button" class="focus:outline-none" onclick="seePassword('password_repeat', 'icon_repeat')">
+                            <i class="fa-regular fa-eye text-[#5F6F52] text-lg" id="icon_repeat"
+                                title="مشاهده تکرار رمز عبور"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <button type="submit"

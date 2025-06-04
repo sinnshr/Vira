@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = "نام کاربری یا رمز عبور اشتباه است.";
     }
 }
+include_once __DIR__ . '/../includes/helper.php';
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -22,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <title>ویرا - ورود به سامانه</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @font-face {
@@ -55,18 +57,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form method="POST" class="space-y-4">
             <div>
                 <label for="username" class="mb-2 block text-gray-700 font-medium">نام کاربری</label>
-                <input type="text" id="username" name="username" required class="border p-2 w-full rounded">
+                <input type="text" id="username" name="username" required class="border p-2 w-full rounded focus:outline-none">
             </div>
             <div>
                 <label for="password" class="mb-2 block text-gray-700 font-medium">رمز عبور</label>
-                <input type="password" id="password" name="password" required class="border p-2 w-full rounded">
+                <div class="flex justify-center items-center">
+                <input type="password" id="password" name="password" required class="border-none p-2 w-full rounded-r focus:outline-none">
+                <div class="bg-white flex items-center px-3 rounded-l" style="height: 40px;">
+                    <button type="button" class="focus:outline-none" onclick="seePassword('password', 'icon')">
+                        <i class="fa-regular fa-eye text-[#5F6F52] text-lg" id="icon" title="مشاهده رمز عبور"></i>
+                    </button>
+                </div>
+                </div>
             </div>
             <button type="submit"
-                class="bg-amber-600 hover:bg-amber-700 text-white p-2 w-full rounded transition-colors duration-200">ورود</button>
+                class="bg-amber-600 hover:bg-amber-700 text-white p-2 w-full rounded transition-colors duration-200">ورود
+            </button>
         </form>
         <p class="mt-4">حساب کاربری ندارید؟ <a href="<?php echo $routes['register']; ?>"
                 class="text-[#5F6F52] font-bold">ثبت‌نام کنید.</a></p>
     </div>
 </body>
-
 </html>
