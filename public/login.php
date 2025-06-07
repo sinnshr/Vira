@@ -24,6 +24,7 @@ include_once __DIR__ . '/../includes/helper.php';
     <title>ویرا - ورود به سامانه</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="/includes/helper.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @font-face {
