@@ -20,11 +20,37 @@ $books = $book->getAllBooks();
 
 <!-- ERROR/SUCCESS MESSAGE -->
 <?php if (!empty($_SESSION['cart_message'])): ?>
-    <div id="cart-popup-message" class="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 px-6 py-4 rounded-xl shadow-lg text-white text-lg
-        <?php echo $_SESSION['cart_message']['type'] === 'success' ? 'bg-green-600' : 'bg-red-600'; ?>"
-        style="min-width:220px;">
+    <div id="cart-popup-overlay" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center"></div>
+    <div id="cart-popup-message" class="fixed left-1/2 top-1/2 z-50 px-8 py-6 rounded-2xl shadow-2xl text-white text-lg
+        <?php echo $_SESSION['cart_message']['type'] === 'success' ? 'bg-lime-800' : 'bg-red-600'; ?>"
+        style="min-width:260px; max-width:90vw; transform: translate(-50%, -50%);">
+        <button id="cart-popup-close" type="button"
+            class="absolute top-2 left-2 bg-transparent border-none text-white text-2xl cursor-pointer z-10 pl-2"
+            aria-label="بستن">&times;</button>
         <?php echo $_SESSION['cart_message']['text']; ?>
     </div>
+    <script>
+        document.body.style.overflow = 'hidden';
+        function closeCartPopup() {
+            var popup = document.getElementById('cart-popup-message');
+            var overlay = document.getElementById('cart-popup-overlay');
+            if (popup) {
+                popup.style.transition = 'opacity 0.5s';
+                popup.style.opacity = '0';
+            }
+            if (overlay) {
+                overlay.style.transition = 'opacity 0.5s';
+                overlay.style.opacity = '0';
+            }
+            setTimeout(function () {
+                if (popup) popup.remove();
+                if (overlay) overlay.remove();
+                document.body.style.overflow = '';
+            }, 600);
+        }
+        setTimeout(closeCartPopup, 2500);
+        document.getElementById('cart-popup-close').onclick = closeCartPopup;
+    </script>
     <?php unset($_SESSION['cart_message']); ?>
 <?php endif; ?>
 
@@ -32,7 +58,8 @@ $books = $book->getAllBooks();
     <div class="text-center mb-12 mt-12">
         <h1 class="text-4xl md:text-5xl font-bold text-[#5F6F52] mb-3 animate-fade-in-down">کتاب‌های ما</h1>
         <div class="w-0 h-1 bg-amber-500 mx-auto rounded-full animate-grow-bar"></div>
-        <p class="mt-4 text-gray-600 max-w-2xl mx-auto text-xl">هر کتاب دریچه‌ای به جهانی نو - گزیده‌ای از بهترین آثار ادبی</p>
+        <p class="mt-4 text-gray-600 max-w-2xl mx-auto text-xl">هر کتاب دریچه‌ای به جهانی نو - گزیده‌ای از بهترین آثار
+            ادبی</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -116,23 +143,6 @@ $books = $book->getAllBooks();
     .animate-grow-bar {
         animation: grow-bar 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
-
-    setTimeout(function () {
-            var popup=document.getElementById('cart-popup-message');
-
-            if (popup) {
-                popup.style.transition='opacity 0.5s';
-                popup.style.opacity='0';
-
-                setTimeout(function () {
-                        popup.remove();
-                    }
-
-                    , 600);
-            }
-        }
-
-        , 2500);
 </style>
 
 <?php
