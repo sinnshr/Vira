@@ -13,7 +13,7 @@ unset($_SESSION['cart']);
         <i class="fa-regular fa-circle-check text-[#5F6F52]"></i>
     </div>
     <div class="text-2xl font-semibold text-gray-800 mb-6">خرید شما با موفقیت انجام شد.</div>
-    <a href="/index.php"
+    <a href="/public/books.php"
         class="inline-block px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-md text-lg transition">بازگشت
         به صفحه اصلی</a>
 </div>

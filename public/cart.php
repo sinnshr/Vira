@@ -2,6 +2,11 @@
 require_once __DIR__ . '/../includes/bootstrap.php';
 $pageTitle = "ویرا - سبد خرید";
 
+if (!isset($_SESSION['id'])) {
+    header('Location: login.php');
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_book_id'])) {
     deleteFromCart($_POST['remove_book_id']);
 }

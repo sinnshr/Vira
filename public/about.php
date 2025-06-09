@@ -10,13 +10,13 @@ ob_start();
         ما تلاش می‌کنیم با ارائه تجربه کاربری ساده، محیطی امن و مجموعه‌ای غنی از کتاب‌ها، بستری مناسب برای علاقه‌مندان به مطالعه فراهم کنیم.
     </p>
     <div class="bg-[#EAEBD0] rounded-lg p-5 mb-6">
-        <h2 class="text-xl font-semibold text-[#5F6F52] mb-2">ماموریت ما</h2>
-        <p class="text-gray-700 leading-relaxed text-justify">
+        <h2 class="text-xl font-bold text-[#5F6F52] mb-2">ماموریت ما</h2>
+        <p class="text-gray-700 leading-relaxed text-justify font-medium">
             ماموریت ویرا فراهم‌کردن دسترسی سریع و آسان به کتاب‌های باکیفیت، حمایت از نویسندگان و ناشران ایرانی و ایجاد جامعه‌ای پویا از کتاب‌دوستان است.
             ما به نوآوری، صداقت و رضایت کاربران متعهد هستیم.
         </p>
     </div>
-    <p class="text-gray-600 text-center mt-8">
+    <p class="text-gray-600 text-center mt-8 font-medium">
         از همراهی شما سپاسگزاریم.<br>
         تیم ویرا
     </p>
