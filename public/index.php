@@ -1,7 +1,7 @@
 <?php
 $pageTitle = "ویرا - هر صفحه یک جهان";
-include_once __DIR__ . '/route.php';
-require_once __DIR__ . '/includes/bootstrap.php';
+include_once __DIR__ . '/../route.php';
+require_once __DIR__ . '/../includes/bootstrap.php';
 
 $commentSuccess = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['comment'])) {
@@ -116,7 +116,7 @@ ob_start();
         </form>
     </div>
     <div class="flex justify-center items-center w-full me-10 md:w-auto mt-6 md:mt-0">
-        <img src="assets/img/comment.png" alt="comment" class="max-w-lg w-full h-auto" style="max-width:600px;">
+        <img src="/assets/img/comment.png" alt="comment" class="max-w-lg w-full h-auto" style="max-width:600px;">
     </div>
 </section>
 
@@ -127,7 +127,7 @@ ob_start();
         renderer: 'svg',
         loop: true,
         autoplay: true,
-        path: 'assets/img/animation.json'
+        path: '/assets/img/animation.json'
     });
     document.addEventListener('DOMContentLoaded', function () {
         const animatedElements = document.querySelectorAll('.animate');
@@ -149,5 +149,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-include 'includes/layout.php';
+include __DIR__ . '/../includes/layout.php';
 ?>
