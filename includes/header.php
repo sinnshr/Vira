@@ -1,6 +1,9 @@
 <?php
 include_once __DIR__ . '/../route.php';
-$cart_items = fetchCart($_SESSION['id']);
+include_once __DIR__ . '/../src/auth.php';
+if (isLoggedIn()) {
+    $cart_items = fetchCart($_SESSION['id']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -11,7 +14,6 @@ $cart_items = fetchCart($_SESSION['id']);
     <title>ویرا - هر صفحه یک جهان</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- <link rel="icon" type="image/x-icon" href="/favicon.png"> -->
     <style>
         @font-face {
             font-family: 'Dana';
@@ -55,10 +57,10 @@ $cart_items = fetchCart($_SESSION['id']);
             </div>
             <a id="logo-link" href="/index.php"
                 style="display: flex; justify-content: center; align-items: center; position: absolute; left: 50%; top: 10px; transform: translateX(-50%) translateY(0); z-index: 30; transition: top 0.4s cubic-bezier(.4,2,.6,1), transform 0.4s cubic-bezier(.4,2,.6,1);">
-                <img src="/logo.png" alt="ویرا" style="height: 80px; object-fit: contain;">
+                <img src="/assets/img/logo.png" alt="ویرا" style="height: 80px; object-fit: contain;">
             </a>
             <ul class="flex space-x-10 space-x-reverse items-center m-0 p-0">
-                <?php if (isset($_SESSION['id'])): ?>
+                <?php if (isLoggedIn()): ?>
                     <li>
                         <a href="<?php echo $routes['profile']; ?>" title="پروفایل">
                             <i class="fas fa-user fa-xl text-black"></i>

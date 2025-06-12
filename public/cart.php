@@ -85,7 +85,7 @@ $cart_items = fetchCart($_SESSION['id']);
                         </span>
                     </div>
                     <div class="flex justify-center">
-                        <a href="../checkout.php"
+                        <a href="/public/checkout.php"
                             class="px-8 py-3 bg-amber-500 hover:bg-amber-600 text-[#163020] font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                             <i class="fa-solid fa-check-to-slot text-[#163020] mx-2 fa-lg"></i>
                             تکمیل خرید
