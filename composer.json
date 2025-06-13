@@ -13,5 +13,8 @@
             "email": "98868456+sinnshr@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "google/apiclient": "^2.18",
+        "vlucas/phpdotenv": "^5.6"
+    }
 }
