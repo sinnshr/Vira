@@ -1,10 +1,18 @@
 <?php
+
+if (!isset($_ENV['DB_HOST'])) {
+    require '../vendor/autoload.php';
+    $rootPath = realpath(__DIR__ . '/../');
+    $dotenv = Dotenv\Dotenv::createImmutable($rootPath);
+    $dotenv->load();
+}
+
 function dbConnect()
 {
-    $host = 'localhost';
-    $db = 'vira';
-    $user = 'root';
-    $pass = '';
+    $host = $_ENV['DB_HOST'];
+    $db = $_ENV['DB_NAME'];
+    $user = $_ENV['DB_USER'];
+    $pass = $_ENV['DB_PASS'];
     $charset = 'utf8mb4';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
