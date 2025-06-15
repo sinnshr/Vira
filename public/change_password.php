@@ -48,7 +48,7 @@ include_once __DIR__ . '/../includes/helper.php';
     <meta charset="UTF-8">
     <title>ویرا - تغییر رمز عبور</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/includes/helper.js"></script>
+    <script src="assets/js/helper.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @font-face {
@@ -87,10 +87,11 @@ include_once __DIR__ . '/../includes/helper.php';
             <div>
                 <label class="block mb-1 text-gray-700 font-medium" for="current_password">رمز عبور فعلی</label>
                 <div class="flex justify-center items-center">
-                    <input type="password" id="password" name="password" required
+                    <input type="password" id="current_password" name="current_password" required
                         class="border-none p-2 w-full rounded-r focus:outline-none">
                     <div class="bg-white flex items-center px-3 rounded-l" style="height: 40px;">
-                        <button type="button" class="focus:outline-none" onclick="seePassword('password', 'icon')">
+                        <button type="button" class="focus:outline-none"
+                            onclick="seePassword('current_password', 'icon')">
                             <i class="fa-regular fa-eye text-[#5F6F52] text-lg" id="icon" title="مشاهده رمز عبور"></i>
                         </button>
                     </div>
@@ -102,8 +103,10 @@ include_once __DIR__ . '/../includes/helper.php';
                     <input type="password" id="new_password" name="new_password" required
                         class="border-none p-2 w-full rounded-r focus:outline-none">
                     <div class="bg-white flex items-center px-3 rounded-l" style="height: 40px;">
-                        <button type="button" class="focus:outline-none" onclick="seePassword('new_password', 'icon_new')">
-                            <i class="fa-regular fa-eye text-[#5F6F52] text-lg" id="icon_new" title="مشاهده رمز عبور"></i>
+                        <button type="button" class="focus:outline-none"
+                            onclick="seePassword('new_password', 'icon_new')">
+                            <i class="fa-regular fa-eye text-[#5F6F52] text-lg" id="icon_new"
+                                title="مشاهده رمز عبور"></i>
                         </button>
                     </div>
                 </div>
