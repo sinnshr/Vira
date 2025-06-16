@@ -60,10 +60,20 @@ ob_start();
         <button type="submit"
             class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded w-full font-bold transition mb-4">به‌روزرسانی</button>
         <div class="flex align-items gap-2">
-            <a href="change_password.php"
-                class="bg-[#5F6F52] hover:bg-[#3C552D] text-white px-4 py-2 rounded font-bold transition text-center block w-full">
-                تغییر رمز عبور
-            </a>
+            <?php
+            if (empty($user['password'])): ?>
+                <a href="add_password.php"
+                    class="bg-[#5F6F52] hover:bg-[#3C552D] text-white px-4 py-2 rounded font-bold transition text-center block w-full">
+                    ایجاد رمز عبور
+                </a>
+
+            <?php else: ?>
+
+                <a href="change_password.php"
+                    class="bg-[#5F6F52] hover:bg-[#3C552D] text-white px-4 py-2 rounded font-bold transition text-center block w-full">
+                    تغییر رمز عبور
+                </a>
+            <?php endif; ?>
             <form method="POST" action="profile.php"
                 onsubmit="return confirm('آیا مطمئن هستید که می‌خواهید حساب خود را حذف کنید؟');">
                 <button type="submit" id="delete_account" name="delete_account"
