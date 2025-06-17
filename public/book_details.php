@@ -72,6 +72,7 @@ ob_start();
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-5">
                     <div class="space-y-4">
+                        <!-- Author -->
                         <div class="flex items-center">
                             <div class="bg-[#DDEB9D] p-2 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#5F6F52]" fill="none"
@@ -85,20 +86,30 @@ ob_start();
                                 <p class="text-lg font-medium"><?php echo $book['author']; ?></p>
                             </div>
                         </div>
+                        <!-- Language -->
+                        <div class="flex items-center pt-5">
+                            <div class="bg-[#DDEB9D] px-2.5 rounded-lg">
+                                <i class="fa-solid fa-earth-americas text-[#5F6F52] py-2.5"></i>
+                            </div>
+                            <div class="mr-4">
+                                <p class="text-gray-600">زبان</p>
+                                <p class="text-lg font-medium"><?php echo $book['language']; ?></p>
+                            </div>
+                        </div>
+                        <!-- Description -->
                         <div class="flex items-start pt-5">
                             <div class="bg-amber-100 rounded-lg flex items-center justify-center"
                                 style="width: 39px; height: 39px;">
-                                <i class="fa-solid fa-tag fa-lg text-amber-700"></i>
+                                <i class="fa-solid fa-info text-amber-700"></i>
                             </div>
                             <div class="mr-4 flex flex-col justify-center">
-                                <p class="text-gray-600">قیمت</p>
-                                <p class="text-2xl font-bold text-amber-600">
-                                    <?php echo toPersianDigits(number_format($book['price'], 0, '.', ',')); ?> تومان
-                                </p>
+                                <h3 class="text-gray-600">درباره کتاب</h3>
+                                <p class="text-lg font-medium"><?php echo $book['description']; ?></p>
                             </div>
                         </div>
                     </div>
                     <div class="space-y-4">
+                        <!-- Genre -->
                         <div class="flex items-center">
                             <div class="bg-[#DDEB9D] p-2 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#5F6F52]" fill="none"
@@ -112,14 +123,33 @@ ob_start();
                                 <p class="text-lg font-medium"><?php echo $book['genre']; ?></p>
                             </div>
                         </div>
+                        <!-- Page count -->
+                        <div class="flex items-center pt-5">
+                            <div class="bg-[#DDEB9D] p-2 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#5F6F52]" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor"
+                                        stroke-width="1.5" fill="none" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M8 8h8M8 12h8M8 16h4" />
+                                </svg>
+                            </div>
+                            <div class="mr-4">
+                                <p class="text-gray-600">تعداد صفحات</p>
+                                <p class="text-lg font-medium"><?php echo toPersianDigits($book['page_count']); ?></p>
+                            </div>
+                        </div>
+                        <!-- Price -->
                         <div class="flex items-start pt-5">
                             <div class="bg-amber-100 rounded-lg flex items-center justify-center"
                                 style="width: 39px; height: 39px;">
-                                <i class="fa-solid fa-info text-amber-700"></i>
+                                <i class="fa-solid fa-tag fa-lg text-amber-700"></i>
                             </div>
                             <div class="mr-4 flex flex-col justify-center">
-                                <h3 class="text-gray-600">درباره کتاب</h3>
-                                <p class="text-lg font-medium"><?php echo $book['description']; ?></p>
+                                <p class="text-gray-600">قیمت</p>
+                                <p class="text-2xl font-bold text-amber-600">
+                                    <?php echo toPersianDigits(number_format($book['price'], 0, '.', ',')); ?> تومان
+                                </p>
                             </div>
                         </div>
                     </div>
