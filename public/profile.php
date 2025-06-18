@@ -1,6 +1,12 @@
 <?php
 require_once __DIR__ . '/../includes/bootstrap.php';
 
+
+if (!isset($_SESSION['id'])) {
+    header('Location: login.php');
+    exit;
+}
+
 $userId = $_SESSION['id'];
 $user = getUserById($userId);
 
