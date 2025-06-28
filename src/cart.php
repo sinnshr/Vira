@@ -16,7 +16,7 @@ function addToCart($book_id)
             // Update quantity
             $stmt = $pdo->prepare("UPDATE cart_items SET quantity = quantity + 1 WHERE user_id = ? AND book_id = ?");
         } else {
-        // if not, insert new item
+            // if not, insert new item
             $stmt = $pdo->prepare("INSERT INTO cart_items (user_id, book_id, quantity) VALUES (?, ?, 1)");
         }
         $stmt->execute([$user_id, $book_id]);
@@ -50,7 +50,8 @@ function fetchCart($user_id)
     return $cart_items;
 }
 
-function deleteFromCart($book_id) : bool {
+function deleteFromCart($book_id): bool
+{
     if (isset($_SESSION['id'])) {
         $user_id = $_SESSION['id'];
         global $pdo;
@@ -66,4 +67,28 @@ function deleteFromCart($book_id) : bool {
         return true;
     }
     return false;
+}
+function changeCartQuantity($book_id, $delta)
+{
+    if (isset($_SESSION['id'])) {
+        $user_id = $_SESSION['id'];
+        global $pdo;
+
+        // Get current quantity
+        $stmt = $pdo->prepare("SELECT quantity FROM cart_items WHERE user_id = ? AND book_id = ?");
+        $stmt->execute([$user_id, $book_id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            $current_quantity = (int) $row['quantity'];
+            $new_quantity = $current_quantity + (int) $delta;
+            if ($new_quantity < 1) {
+                $new_quantity = 1;
+            }
+            $stmt = $pdo->prepare("UPDATE cart_items SET quantity = ? WHERE user_id = ? AND book_id = ?");
+            $stmt->execute([$new_quantity, $user_id, $book_id]);
+            // Update session
+            $_SESSION['cart'][$book_id] = $new_quantity;
+        }
+    }
 }

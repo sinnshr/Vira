@@ -7,8 +7,19 @@ if (!isset($_SESSION['id'])) {
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_book_id'])) {
-    deleteFromCart($_POST['remove_book_id']);
+// Handle quantity increase/decrease and removal
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['remove_book_id'])) {
+        deleteFromCart($_POST['remove_book_id']);
+    } elseif (isset($_POST['change_quantity_book_id'], $_POST['change_quantity_action'])) {
+        $book_id = $_POST['change_quantity_book_id'];
+        $action = $_POST['change_quantity_action'];
+        if ($action === 'increase') {
+            changeCartQuantity($book_id, 1);
+        } elseif ($action === 'decrease') {
+            changeCartQuantity($book_id, -1);
+        }
+    }
 }
 
 ob_start();
@@ -45,8 +56,24 @@ $cart_items = fetchCart($_SESSION['id']);
                         <div class="flex items-center gap-8">
                             <div class="flex items-center">
                                 <span class="text-gray-700 ml-2">تعداد:</span>
-                                <span
-                                    class="bg-gray-100 px-3 py-1 rounded-lg font-bold"><?php echo toPersianDigits($quantity); ?></span>
+                                <form method="post" class="flex items-center space-x-1 space-x-reverse">
+                                    <input type="hidden" name="change_quantity_book_id" value="<?php echo $book_id; ?>">
+                                    <button type="submit" name="change_quantity_action" value="increase"
+                                        class="w-8 h-8 rounded-lg bg-[#A9B388] hover:bg-[#5F6F52] text-white flex items-center justify-center transition"
+                                        title="افزایش تعداد">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                    <span
+                                        class="bg-gray-100 px-3 py-1 rounded-lg font-bold mx-2 select-none min-w-[2.5rem] text-center">
+                                        <?php echo toPersianDigits($quantity); ?>
+                                    </span>
+                                    <button type="submit" name="change_quantity_action" value="decrease"
+                                        class="w-8 h-8 rounded-lg bg-[#A9B388] hover:bg-[#5F6F52] text-white flex items-center justify-center transition disabled:opacity-60 disabled:cursor-not-allowed"
+                                        title="کاهش تعداد" <?php if ($quantity <= 1)
+                                            echo 'disabled'; ?>>
+                                        <i class="fa-solid fa-minus"></i>
+                                    </button>
+                                </form>
                             </div>
 
                             <div>
