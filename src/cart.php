@@ -92,3 +92,43 @@ function changeCartQuantity($book_id, $delta)
         }
     }
 }
+function finalizeCartToOrder($user_id)
+{
+    global $pdo;
+    $cart_items = fetchCart($user_id);
+    if (empty($cart_items)) {
+        return false;
+    }
+
+    $pdo->beginTransaction();
+    try {
+        // create new order
+        $stmt = $pdo->prepare("INSERT INTO orders (user_id, created_at, status) VALUES (?, NOW(), 'در حال پردازش')");
+        $stmt->execute([$user_id]);
+        $order_id = $pdo->lastInsertId();
+
+        // add items to order_items table
+        $stmt_item = $pdo->prepare("INSERT INTO order_items (order_id, book_id, quantity, price) VALUES (?, ?, ?, ?)");
+        foreach ($cart_items as $item) {
+            $stmt_item->execute([
+                $order_id,
+                $item['book_id'],
+                $item['quantity'],
+                $item['price']
+            ]);
+        }
+
+        // delete items from cart
+        $stmt = $pdo->prepare("DELETE FROM cart_items WHERE user_id = ?");
+        $stmt->execute([$user_id]);
+
+        $pdo->commit();
+        // delete cart from session
+        unset($_SESSION['cart']);
+        return $order_id;
+    } catch (Exception $e) {
+        error_log("Order creation failed: " . $e->getMessage());
+        $pdo->rollBack();
+        return false;
+    }
+}
