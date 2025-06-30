@@ -7,19 +7,7 @@ if (!isset($_SESSION['id'])) {
     exit;
 }
 
-// Check if cart is empty before finalizing order
-$cart_items = fetchCart($_SESSION['id']);
-if (empty($cart_items)) {
-    $order_id = false;
-    $order_error = "سبد خرید شما خالی است.";
-} else {
-    // تبدیل سبد خرید به سفارش
-    $order_id = finalizeCartToOrder($_SESSION['id']);
-    $order_error = null;
-    if (!$order_id) {
-        $order_error = "خطا در ثبت سفارش. لطفاً دوباره تلاش کنید.";
-    }
-}
+$order_id = finalizeCartToOrder($_SESSION['id']);
 ?>
 <div class="flex flex-col items-center justify-center h-screen -mt-16">
     <?php if ($order_id): ?>
@@ -31,15 +19,13 @@ if (empty($cart_items)) {
             شماره سفارش: <span class="font-bold text-[#5F6F52]"><?= $order_id ?></span>
         </div>
         <a href="/orders.php"
-            class="inline-block px-6 py-2 bg-[#A9B388] hover:bg-[#5F6F52] text-white rounded-md text-lg transition">مشاهده
+            class="inline-block px-6 py-2 bg-[#5F5F52] hover:bg-[#5F6F52] text-white rounded-md text-lg transition">مشاهده
             تاریخچه سفارش‌ها</a>
         <a href="/books.php"
             class="inline-block px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-md text-lg transition mt-2">بازگشت
             به صفحه اصلی</a>
     <?php else: ?>
-        <div class="text-2xl text-red-600 mb-4">
-            <?= htmlspecialchars($order_error) ?>
-        </div>
+        <div class="text-2xl text-red-600 mb-4">خطا در ثبت سفارش. لطفاً دوباره تلاش کنید.</div>
         <a href="/cart.php"
             class="inline-block px-6 py-2 bg-[#A9B388] hover:bg-[#5F6F52] text-white rounded-md text-lg transition">بازگشت
             به سبد خرید</a>

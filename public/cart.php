@@ -112,7 +112,7 @@ $cart_items = fetchCart($_SESSION['id']);
                         </span>
                     </div>
                     <div class="flex justify-center">
-                        <a href="/public/checkout.php"
+                        <a href="/checkout.php"
                             class="px-8 py-3 bg-amber-500 hover:bg-amber-600 text-[#163020] font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                             <i class="fa-solid fa-check-to-slot text-[#163020] mx-2 fa-lg"></i>
                             تکمیل خرید
@@ -122,7 +122,7 @@ $cart_items = fetchCart($_SESSION['id']);
             </div>
         </div>
     <?php else: ?>
-        <div class="text-center py-16">
+        <div class="text-center pt-5 pb-20">
             <div class="mx-auto w-24 h-24 bg-[#A9B388] rounded-full flex items-center justify-center mb-6">
                 <i class="fa-solid fa-cart-shopping fa-2x text-[#FEFAE0]"></i>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -130,7 +130,7 @@ $cart_items = fetchCart($_SESSION['id']);
             </div>
             <h3 class="text-2xl font-bold text-gray-700 mb-2">سبد خرید شما خالی است</h3>
             <p class="text-gray-600 mb-6">می‌توانید با مراجعه به صفحه کتاب‌ها، کتاب‌های جدید را کشف کنید.</p>
-            <a href="/public/books.php"
+            <a href="/books.php"
                 class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#A9B388] to-[#5F6F52] text-white rounded-lg font-medium hover:from-[#7C8B62] hover:to-[#43513C]">
                 مشاهده کتاب‌ها
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
