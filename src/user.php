@@ -38,4 +38,31 @@ function getUserByUsername($username)
     $stmt->execute([$username]);
     return $stmt->fetch();
 }
+
+function getUserOrders($user_id)
+{
+    $conn = dbConnect();
+    $stmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC");
+    $stmt->execute([$user_id]);
+    return $stmt->fetchAll();
+}
+
+function getOrderDetails($order_id, $user_id)
+{
+    $conn = dbConnect();
+    // fetch order
+    $stmt = $conn->prepare("SELECT * FROM orders WHERE id = ? AND user_id = ?");
+    $stmt->execute([$order_id, $user_id]);
+    $order = $stmt->fetch();
+    if (!$order)
+        return null;
+
+    // fetch order items
+    $stmt = $conn->prepare("SELECT oi.*, b.title, b.author, b.image_url FROM order_items oi JOIN books b ON oi.book_id = b.book_id WHERE oi.order_id = ?");
+    $stmt->execute([$order_id]);
+    $items = $stmt->fetchAll();
+
+    $order['items'] = $items;
+    return $order;
+}
 ?>
