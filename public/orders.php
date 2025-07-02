@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../includes/bootstrap.php';
-$pageTitle = "ویرا - تاریخچه سفارش‌ها";
+$pageTitle = "ویرا - تاریخچه سفارشات";
 
 if (!isset($_SESSION['id'])) {
     header('Location: login.php');
@@ -14,9 +14,9 @@ ob_start();
 ?>
 <div class="min-h-screen pt-10 pb-40">
     <div class="w-full max-w-3xl mx-auto flex flex-col items-center px-2 sm:px-4">
-        <div class="text-center mt-6 mb-5 w-full">
-            <h1 class="text-4xl font-bold text-[#283925] mb-3 mt-4 tracking-tight leading-none">تاریخچه سفارشات</h1>
-            <div class="mx-auto h-1 w-28 bg-yellow-400 rounded mt-1"></div>
+        <div class="text-center mb-2 mt-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-[#5F6F52] mb-3">تاریخچه سفارشات</h1>
+            <div class="w-24 h-1 bg-amber-500 mx-auto rounded-full"></div>
         </div>
         <?php if (empty($orders)): ?>
             <div class="w-full text-center my-14">
@@ -31,22 +31,23 @@ ob_start();
                         class="bg-white rounded-xl shadow-md p-7 flex flex-col md:flex-row md:items-center gap-3 md:gap-6 border border-transparent md:hover:border-green-200 transitional ease-in">
                         <div class="w-full md:flex-1 grid grid-cols-1 md:grid-cols-4 gap-3 place-items-start items-center">
                             <div>
-                                <div class="font-bold text-xl tracking-tight text-amber-800">#<?= $order['id'] ?></div>
-                                <div class="font-medium text-gray-400 text-[12.75px] mt-1">شماره سفارش</div>
+                                <div class="font-bold text-xl tracking-tight text-amber-800">
+                                    #<?= toPersianDigits($order['id']) ?></div>
+                                <div class="font-medium text-gray-400 text-[12.75px]">شماره سفارش</div>
                             </div>
                             <div>
-                                <div class="font-semibold text-gray-800">
-                                    <?= toPersianDigits(date('Y/m/d', strtotime($order['created_at']))) ?></div>
-                                <div class="font-normal text-[12.75px] text-muted-400 text-zinc-400">تاریخ سفارش</div>
+                                <div class="font-semibold text-gray-800"
+                                    data-date="<?= date('Y-m-d', strtotime($order['created_at'])) ?>">
+                                </div>
+                                <div class="font-medium text-gray-400 text-[12.75px] mt-1">تاریخ سفارش</div>
                             </div>
                             <div>
-                                <div class="inline-block status-badge bg-orange-50 text-yellow-600 font-bold px-3.5 py-1.5 rounded hover:brightness-105 duration-100"
+                                <div class="inline-block status-badge bg-orange-50 text-yellow-600 font-bold px-3.5 py-1.5 rounded-lg border border-orange-200"
                                     title="<?= htmlspecialchars($order['status']) ?>"><?= htmlspecialchars($order['status']) ?>
                                 </div>
                             </div>
                             <div>
-                                <a href="order_details.php?id=<?= $order['id'] ?>" class="inline-block rounded-lg px-5 py-1.5 font-border font-medium text-sm text-white bg-[#4d6847] hover:bg-[#39693969]
-                        duration-200 shadow hover:shadow-differentiev">جزئیات...</a>
+                                <a href="order_details.php?id=<?= $order['id'] ?>" class="inline-block rounded-lg px-5 py-1.5 font-border font-medium  text-white bg-[#4d6847] hover:bg-[#283925] shadow lg:mr-10">جزئیات...</a>
                             </div>
                         </div>
                     </div>
@@ -59,6 +60,13 @@ ob_start();
         </div>
     </div>
 </div>
+<script src="assets/js/helper.js"></script>
+<script>
+    document.querySelectorAll('[data-date]').forEach(el => {
+        const gDate = el.getAttribute('data-date');
+        el.textContent = toPersianDate(gDate);
+    });
+</script>
 <?php
 renderPage(ob_get_clean(), $pageTitle);
 ?>

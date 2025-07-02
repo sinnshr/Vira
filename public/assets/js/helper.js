@@ -12,3 +12,16 @@ function seePassword(inputId, iconId) {
     icon.classList.add("fa-eye");
         }
 }
+
+function toPersianDate(date) {
+    if (!(date instanceof Date)) {
+        date = new Date(date);
+    }
+
+    return new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    }).format(date);
+}
+  
