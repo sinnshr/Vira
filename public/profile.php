@@ -64,7 +64,11 @@ ob_start();
                 required>
         </div>
         <button type="submit"
-            class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded w-full font-bold transition mb-4">به‌روزرسانی</button>
+            class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded w-full font-bold transition">به‌روزرسانی</button>
+        <a href="logout.php"
+            class="bg-gray-500 hover:bg-gray-700 text-white px-4 py-2 my-2 rounded font-bold transition text-center block">
+            خروج از حساب
+        </a>
         <div class="flex align-items gap-2">
             <?php
             if (empty($user['password'])): ?>
@@ -72,9 +76,7 @@ ob_start();
                     class="bg-[#5F6F52] hover:bg-[#3C552D] text-white px-4 py-2 rounded font-bold transition text-center block w-full">
                     ایجاد رمز عبور
                 </a>
-
             <?php else: ?>
-
                 <a href="change_password.php"
                     class="bg-[#5F6F52] hover:bg-[#3C552D] text-white px-4 py-2 rounded font-bold transition text-center block w-full">
                     تغییر رمز عبور

@@ -67,8 +67,8 @@ if (isLoggedIn()) {
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo $routes['logout']; ?>" title="خروج">
-                            <i class="fas fa-sign-out-alt fa-xl text-black"></i>
+                        <a href="<?php echo $routes['orders']; ?>" title="تاریخچه‌ی سفارشات">
+                        <i class="fa-solid fa-clock-rotate-left fa-xl text-black"></i>
                         </a>
                     </li>
                 <?php else: ?>

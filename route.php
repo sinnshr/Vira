@@ -8,4 +8,5 @@ $routes = [
     'books'     => '/books.php',
     'cart'      => '/cart.php',
     'about'     => '/about.php',
+    'orders'    => '/orders.php'
 ];
