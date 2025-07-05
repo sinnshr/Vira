@@ -78,7 +78,7 @@ if ($searchText !== '') {
             ادبی</p>
         <div id="search-bar-container" class="flex justify-center mt-4">
             <form id="search-bar"
-                class="flex items-center bg-[#FEFAE0] transition-all duration-300 overflow-hidden rounded-lg"
+                class="flex items-center bg-[#e8e3c1] transition-all duration-300 overflow-hidden rounded-lg"
                 style="width:48px; height:40px; padding:0 10px; border: none;" method="get" action="books.php" autocomplete="off" onsubmit="return submitSearch(event);">
                 <button id="search-icon-btn" type="button"
                     class="flex items-center justify-center text-[#5F6F52] text-2xl focus:outline-none"

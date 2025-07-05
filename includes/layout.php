@@ -18,7 +18,7 @@
 
         body {
             font-family: 'Dana', 'Tahoma', 'Arial', sans-serif;
-            background-color: #FEFAE0;
+            background-color: #e8e3c1;
         }
     </style>
 </head>
