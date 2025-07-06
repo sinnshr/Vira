@@ -52,11 +52,12 @@ if (isLoggedIn()) {
                 </li>
             </ul>
             <div id="header-curve"
-                class="flex justify-center items-center w-[320px] h-[100px] rounded-tl-[160px_80px] rounded-tr-[160px_80px] rounded-bl-[160px_160px]
+                class="hidden md:flex justify-center items-center w-[320px] h-[100px] rounded-tl-[160px_80px] rounded-tr-[160px_80px] rounded-bl-[160px_160px]
             rounded-br-[160px_160px] bg-[#5F6F52] overflow-hidden relative z-20 mb-[-50px] transition-transform transition-opacity duration-400 ease-[cubic-bezier(.4,2,.6,1)] border-b-0">
             </div>
             <a id="logo-link" href="/index.php"
-                style="display: flex; justify-content: center; align-items: center; position: absolute; left: 50%; top: 10px; transform: translateX(-50%) translateY(0); z-index: 30; transition: top 0.4s cubic-bezier(.4,2,.6,1), transform 0.4s cubic-bezier(.4,2,.6,1);">
+                class="hidden md:flex justify-center items-center absolute left-1/2 top-[10px] -translate-x-1/2 translate-y-0 z-30 transition-all duration-400 ease-[cubic-bezier(.4,2,.6,1)]"
+                style="transition-property: top, transform;">
                 <img src="/assets/img/logo.png" alt="ویرا" style="height: 80px; object-fit: contain;">
             </a>
             <ul class="flex space-x-10 space-x-reverse items-center m-0 p-0">
@@ -91,22 +92,40 @@ if (isLoggedIn()) {
             var curve = document.getElementById('header-curve');
             var logoLink = document.getElementById('logo-link');
             var header = document.getElementById('header');
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > 30) {
-                    curve.style.transform = 'translateY(-100%)';
-                    curve.style.opacity = '0';
-                    logoLink.style.top = '50%';
-                    logoLink.style.transform = 'translate(-50%, -50%)';
-                    header.style.paddingTop = '1rem';
-                    header.style.paddingBottom = '1rem';
-                } else {
-                    curve.style.transform = 'translateY(0)';
-                    curve.style.opacity = '1';
-                    logoLink.style.top = '10px';
-                    logoLink.style.transform = 'translateX(-50%) translateY(0)';
-                    header.style.paddingTop = '';
-                    header.style.paddingBottom = '';
-                }
-            });
+
+            function isLargeOrMediumScreen() {
+            return window.innerWidth >= 768;
+            }
+
+            function handleScroll() {
+            if (!isLargeOrMediumScreen()) {
+                curve.style.transform = '';
+                curve.style.opacity = '';
+                logoLink.style.top = '';
+                logoLink.style.transform = '';
+                header.style.paddingTop = '';
+                header.style.paddingBottom = '';
+                return;
+            }
+            if (window.scrollY > 30) {
+                curve.style.transform = 'translateY(-100%)';
+                curve.style.opacity = '0';
+                logoLink.style.top = '50%';
+                logoLink.style.transform = 'translate(-50%, -50%)';
+                header.style.paddingTop = '1rem';
+                header.style.paddingBottom = '1rem';
+            } else {
+                curve.style.transform = 'translateY(0)';
+                curve.style.opacity = '1';
+                logoLink.style.top = '10px';
+                logoLink.style.transform = 'translateX(-50%) translateY(0)';
+                header.style.paddingTop = '';
+                header.style.paddingBottom = '';
+            }
+            }
+
+            window.addEventListener('scroll', handleScroll);
+            window.addEventListener('resize', handleScroll);
+            handleScroll();
         })();
     </script>
