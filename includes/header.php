@@ -26,14 +26,24 @@ if (isLoggedIn()) {
         body {
             font-family: 'Dana', 'Tahoma', 'Arial', sans-serif;
         }
+
+        @media (max-width: 767px) {
+            nav ul {
+                gap: 1.5rem !important;
+            }
+            nav ul li a i {
+                font-size: 2rem !important;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <header class="text-white p-2 sticky top-0"
+    <header class="text-white p-2 sticky top-0 min-h-[80px] md:min-h-0"
         style="background-color: #5F6F52; transition: padding 0.4s cubic-bezier(.4,2,.6,1); z-index: 1000;" id="header">
-        <nav class="container mx-auto flex justify-center items-center gap-x-12" style="position: relative;">
-            <ul class="flex space-x-10 space-x-reverse items-center m-0 p-0">
+        <nav class="container mx-auto flex justify-center items-center gap-x-12 min-h-[80px]"
+            style="position: relative;">
+            <ul class="flex items-center m-0 p-0 h-full gap-10 md:gap-10">
                 <li>
                     <a href="<?php echo $routes['books']; ?>" title="کتاب‌ها">
                         <i class="fas fa-book fa-xl text-black"></i>
@@ -60,7 +70,7 @@ if (isLoggedIn()) {
                 style="transition-property: top, transform;">
                 <img src="/assets/img/logo.png" alt="ویرا" style="height: 80px; object-fit: contain;">
             </a>
-            <ul class="flex space-x-10 space-x-reverse items-center m-0 p-0">
+            <ul class="flex items-center m-0 p-0 h-full gap-10 md:gap-10">
                 <?php if (isLoggedIn()): ?>
                     <li>
                         <a href="<?php echo $routes['profile']; ?>" title="پروفایل">
@@ -69,7 +79,7 @@ if (isLoggedIn()) {
                     </li>
                     <li>
                         <a href="<?php echo $routes['orders']; ?>" title="تاریخچه‌ی سفارشات">
-                        <i class="fa-solid fa-clock-rotate-left fa-xl text-black"></i>
+                            <i class="fa-solid fa-clock-rotate-left fa-xl text-black"></i>
                         </a>
                     </li>
                 <?php else: ?>
@@ -94,34 +104,38 @@ if (isLoggedIn()) {
             var header = document.getElementById('header');
 
             function isLargeOrMediumScreen() {
-            return window.innerWidth >= 768;
+                return window.innerWidth >= 768;
             }
 
             function handleScroll() {
-            if (!isLargeOrMediumScreen()) {
-                curve.style.transform = '';
-                curve.style.opacity = '';
-                logoLink.style.top = '';
-                logoLink.style.transform = '';
-                header.style.paddingTop = '';
-                header.style.paddingBottom = '';
-                return;
-            }
-            if (window.scrollY > 30) {
-                curve.style.transform = 'translateY(-100%)';
-                curve.style.opacity = '0';
-                logoLink.style.top = '50%';
-                logoLink.style.transform = 'translate(-50%, -50%)';
-                header.style.paddingTop = '1rem';
-                header.style.paddingBottom = '1rem';
-            } else {
-                curve.style.transform = 'translateY(0)';
-                curve.style.opacity = '1';
-                logoLink.style.top = '10px';
-                logoLink.style.transform = 'translateX(-50%) translateY(0)';
-                header.style.paddingTop = '';
-                header.style.paddingBottom = '';
-            }
+                if (!isLargeOrMediumScreen()) {
+                    curve.style.transform = '';
+                    curve.style.opacity = '';
+                    logoLink.style.top = '';
+                    logoLink.style.transform = '';
+                    header.style.paddingTop = '';
+                    header.style.paddingBottom = '';
+                    // make header taller on mobile
+                    header.style.minHeight = '80px';
+                    return;
+                }
+                if (window.scrollY > 30) {
+                    curve.style.transform = 'translateY(-100%)';
+                    curve.style.opacity = '0';
+                    logoLink.style.top = '50%';
+                    logoLink.style.transform = 'translate(-50%, -50%)';
+                    header.style.paddingTop = '1rem';
+                    header.style.paddingBottom = '1rem';
+                    header.style.minHeight = '';
+                } else {
+                    curve.style.transform = 'translateY(0)';
+                    curve.style.opacity = '1';
+                    logoLink.style.top = '10px';
+                    logoLink.style.transform = 'translateX(-50%) translateY(0)';
+                    header.style.paddingTop = '';
+                    header.style.paddingBottom = '';
+                    header.style.minHeight = '';
+                }
             }
 
             window.addEventListener('scroll', handleScroll);

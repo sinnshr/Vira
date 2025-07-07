@@ -80,23 +80,23 @@ ob_start();
     </svg>
 </div>
 
-<section class="w-full py-10 px-4 bg-[#FEFAE0] flex flex-col md:flex-row items-start md:items-center justify-between">
-    <div class="flex-1">
-        <h2 class="text-2xl font-bold mb-4 text-[#5F6F52] mx-1 px-12">با ارسال نظر، به پیشرفت ما کمک کنید.</h2>
-        <form method="post" action="" class="w-full max-w-xl bg-[#A9B388] rounded-lg shadow p-6 mb-6 mx-12 ps-12">
+<section class="w-full py-10 px-2 sm:px-4 bg-[#FEFAE0] flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+    <div class="flex-1 w-full">
+        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-[#5F6F52] mx-1 px-2 sm:px-8 md:px-12">با ارسال نظر، به پیشرفت ما کمک کنید.</h2>
+        <form method="post" action="" class="w-full max-w-xl bg-[#A9B388] rounded-lg shadow p-4 sm:p-6 mb-6 mx-auto">
             <div class="mb-4">
                 <label class="block text-[#FEFAE0] mb-2" for="name">نام شما:</label>
                 <input type="text" id="name" name="name" required
-                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470]">
+                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470] text-sm sm:text-base">
             </div>
             <div class="mb-4">
                 <label class="block text-[#FEFAE0] mb-2" for="comment">نظر شما:</label>
                 <textarea id="comment" name="comment" rows="3" required
-                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470]"></textarea>
+                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B99470] text-sm sm:text-base"></textarea>
             </div>
             <div class="flex justify-end">
                 <button type="submit"
-                    class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded transition">
+                    class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded transition text-sm sm:text-base">
                     ارسال نظر
                 </button>
             </div>
@@ -115,8 +115,8 @@ ob_start();
             <?php endif; ?>
         </form>
     </div>
-    <div class="flex justify-center items-center w-full me-10 md:w-auto mt-6 md:mt-0">
-        <img src="/assets/img/comment.png" alt="comment" class="max-w-lg w-full h-auto" style="max-width:600px;">
+    <div class="flex justify-center items-center w-full md:w-auto mt-4 md:mt-0">
+        <img src="/assets/img/comment.png" alt="comment" class="max-w-xs sm:max-w-md md:max-w-lg w-full h-auto" style="max-width:600px;">
     </div>
 </section>
 

@@ -23,9 +23,9 @@
     </style>
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
     <?php include 'header.php'; ?>
-    <main class="p-0 m-0">
+    <main class="flex-1 p-0 m-0">
         <?php if (isset($content)) {
             echo $content;
         } ?>
