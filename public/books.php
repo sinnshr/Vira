@@ -1,63 +1,48 @@
 <?php
 require_once __DIR__ . '/../includes/bootstrap.php';
 $pageTitle = "ویرا - کتاب‌های ما";
-
-$searchText = '';
-if (isset($_GET['search']) && trim($_GET['search']) !== '') {
-    $searchText = trim($_GET['search']);
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_id'])) {
+$searchText = isset($_GET['search']) ? trim($_GET['search']) : '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['book_id'])) {
     $result = addToCart($_POST['book_id']);
-    if ($result === true) {
-        $_SESSION['cart_message'] = ['type' => 'success', 'text' => 'کتاب با موفقیت به سبد خرید افزوده شد.'];
-    } else {
-        $_SESSION['cart_message'] = ['type' => 'error', 'text' => 'خطا در افزودن کتاب به سبد خرید.'];
-    }
+    $_SESSION['cart_message'] = [
+        'type' => $result === true ? 'success' : 'error',
+        'text' => $result === true ? 'کتاب با موفقیت به سبد خرید افزوده شد.' : 'خطا در افزودن کتاب به سبد خرید.'
+    ];
     header("Location: books.php");
     exit;
 }
 ob_start();
-
 $book = new Book();
-if ($searchText !== '') {
-    $books = array_filter($book->getAllBooks(), function($b) use ($searchText) {
+$books = $searchText !== ''
+    ? array_filter($book->getAllBooks(), function ($b) use ($searchText) {
         $search = mb_strtolower($searchText, 'UTF-8');
         return (
             mb_strpos(mb_strtolower($b['title'], 'UTF-8'), $search) !== false ||
             mb_strpos(mb_strtolower($b['author'], 'UTF-8'), $search) !== false ||
             (isset($b['isbn']) && mb_strpos(mb_strtolower($b['isbn'], 'UTF-8'), $search) !== false)
         );
-    });
-} else {
-    $books = $book->getAllBooks();
-}
+    })
+    : $book->getAllBooks();
 ?>
 
 <!-- ERROR/SUCCESS MESSAGE -->
 <?php if (!empty($_SESSION['cart_message'])): ?>
     <div id="cart-popup-overlay" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center"></div>
     <div id="cart-popup-message" class="fixed left-1/2 top-1/2 z-50 px-8 py-6 rounded-2xl shadow-2xl text-white text-lg
-        <?php echo $_SESSION['cart_message']['type'] === 'success' ? 'bg-lime-800' : 'bg-red-600'; ?>"
+        <?= $_SESSION['cart_message']['type'] === 'success' ? 'bg-lime-800' : 'bg-red-600'; ?>"
         style="min-width:260px; max-width:90vw; transform: translate(-50%, -50%);">
         <button id="cart-popup-close" type="button"
             class="absolute top-2 left-2 bg-transparent border-none text-white text-2xl cursor-pointer z-10 pl-2"
             aria-label="بستن">&times;</button>
-        <?php echo $_SESSION['cart_message']['text']; ?>
+        <?= $_SESSION['cart_message']['text']; ?>
     </div>
     <script>
         document.body.style.overflow = 'hidden';
         function closeCartPopup() {
             var popup = document.getElementById('cart-popup-message');
             var overlay = document.getElementById('cart-popup-overlay');
-            if (popup) {
-                popup.style.transition = 'opacity 0.5s';
-                popup.style.opacity = '0';
-            }
-            if (overlay) {
-                overlay.style.transition = 'opacity 0.5s';
-                overlay.style.opacity = '0';
-            }
+            if (popup) popup.style.opacity = '0';
+            if (overlay) overlay.style.opacity = '0';
             setTimeout(function () {
                 if (popup) popup.remove();
                 if (overlay) overlay.remove();
@@ -79,7 +64,8 @@ if ($searchText !== '') {
         <div id="search-bar-container" class="flex justify-center mt-4">
             <form id="search-bar"
                 class="flex items-center bg-[#e8e3c1] transition-all duration-300 overflow-hidden rounded-lg"
-                style="width:48px; height:40px; padding:0 10px; border: none;" method="get" action="books.php" autocomplete="off" onsubmit="return submitSearch(event);">
+                style="width:48px; height:40px; padding:0 10px; border: none;" method="get" action="books.php"
+                autocomplete="off" onsubmit="return submitSearch(event);">
                 <button id="search-icon-btn" type="button"
                     class="flex items-center justify-center text-[#5F6F52] text-2xl focus:outline-none"
                     aria-label="جستجو" style="width:32px; height:32px; background:transparent; border:none;">
@@ -88,8 +74,7 @@ if ($searchText !== '') {
                 <input id="search-input" name="search" type="text" placeholder="جستجوی کتاب..."
                     class="bg-transparent text-[#5F6F52] text-right px-2 py-0 w-0 opacity-0 transition-all duration-300 focus:outline-none rounded-lg align-middle"
                     style="border:none; height:32px; font-size:1rem;"
-                    value="<?php echo htmlspecialchars($searchText); ?>"
-                />
+                    value="<?php echo htmlspecialchars($searchText); ?>" />
             </form>
         </div>
     </div>
@@ -245,13 +230,13 @@ if ($searchText !== '') {
 
     // If there is a search term, keep the bar open on page load
     <?php if ($searchText !== ''): ?>
-    window.addEventListener('DOMContentLoaded', function() {
-        searchBar.style.width = '260px';
-        searchBar.style.border = '1px solid #5F6F52';
-        searchInput.style.width = '200px';
-        searchInput.style.opacity = '1';
-        searchOpen = true;
-    });
+        window.addEventListener('DOMContentLoaded', function () {
+            searchBar.style.width = '260px';
+            searchBar.style.border = '1px solid #5F6F52';
+            searchInput.style.width = '200px';
+            searchInput.style.opacity = '1';
+            searchOpen = true;
+        });
     <?php endif; ?>
 </script>
 

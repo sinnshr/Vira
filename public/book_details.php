@@ -1,50 +1,38 @@
 <?php
 require_once __DIR__ . '/../includes/bootstrap.php';
-
 $book_id = $_GET['id'];
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_id'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['book_id'])) {
     $result = addToCart($_POST['book_id']);
-    if ($result === true) {
-        $_SESSION['cart_message'] = ['type' => 'success', 'text' => 'کتاب با موفقیت به سبد خرید افزوده شد.'];
-    } else {
-        $_SESSION['cart_message'] = ['type' => 'error', 'text' => 'خطا در افزودن کتاب به سبد خرید.'];
-    }
+    $_SESSION['cart_message'] = [
+        'type' => $result === true ? 'success' : 'error',
+        'text' => $result === true ? 'کتاب با موفقیت به سبد خرید افزوده شد.' : 'خطا در افزودن کتاب به سبد خرید.'
+    ];
     header("Location: book_details.php?id=" . urlencode($_POST['book_id']));
     exit;
 }
-
 $bookObj = new Book();
 $book = $bookObj->getBookById($book_id);
-
 $pageTitle = "ویرا - " . $book['title'];
 ob_start();
 ?>
-
 <!-- ERROR/SUCCESS MESSAGE -->
 <?php if (!empty($_SESSION['cart_message'])): ?>
     <div id="cart-popup-overlay" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center"></div>
     <div id="cart-popup-message" class="fixed left-1/2 top-1/2 z-50 px-8 py-6 rounded-2xl shadow-2xl text-white text-lg
-        <?php echo $_SESSION['cart_message']['type'] === 'success' ? 'bg-lime-800' : 'bg-red-600'; ?>"
+        <?= $_SESSION['cart_message']['type'] === 'success' ? 'bg-lime-800' : 'bg-red-600'; ?>"
         style="min-width:260px; max-width:90vw; transform: translate(-50%, -50%);">
         <button id="cart-popup-close" type="button"
             class="absolute top-2 left-2 bg-transparent border-none text-white text-2xl cursor-pointer z-10 pl-2"
             aria-label="بستن">&times;</button>
-        <?php echo $_SESSION['cart_message']['text']; ?>
+        <?= $_SESSION['cart_message']['text']; ?>
     </div>
     <script>
         document.body.style.overflow = 'hidden';
         function closeCartPopup() {
             var popup = document.getElementById('cart-popup-message');
             var overlay = document.getElementById('cart-popup-overlay');
-            if (popup) {
-                popup.style.transition = 'opacity 0.5s';
-                popup.style.opacity = '0';
-            }
-            if (overlay) {
-                overlay.style.transition = 'opacity 0.5s';
-                overlay.style.opacity = '0';
-            }
+            if (popup) popup.style.opacity = '0';
+            if (overlay) overlay.style.opacity = '0';
             setTimeout(function () {
                 if (popup) popup.remove();
                 if (overlay) overlay.remove();
