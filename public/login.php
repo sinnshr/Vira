@@ -8,22 +8,16 @@ $dotenv = Dotenv\Dotenv::createImmutable($rootPath);
 $dotenv->safeLoad();
 
 $client = new Google\Client;
-
 $client->setClientId($_ENV['GOOGLE_CLIENT_ID']);
 $client->setClientSecret($_ENV['GOOGLE_CLIENT_SECRET']);
 $client->setRedirectUri($_ENV['GOOGLE_CLIENT_REDIRECT_URI']);
-
 $client->addScope("email");
 $client->addScope("profile");
-
 $url = $client->createAuthUrl();
 
 $error = '';
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    if (login($username, $password)) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['username']) && !empty($_POST['password'])) {
+    if (login($_POST['username'], $_POST['password'])) {
         header("Location: books.php");
         exit;
     } else {

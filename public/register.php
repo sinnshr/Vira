@@ -26,26 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $password_repeat = $_POST['password_repeat'] ?? '';
     $email = trim($_POST['email']);
-    $full_name = $_POST['full_name'] ?? '';
-    $address = $_POST['address'] ?? '';
-    $phone_number = $_POST['phone_number'] ?? '';
 
-    if (getUserByUsername($username)) {
+    // Only check username once
+    $userExists = getUserByUsername($username);
+
+    if ($userExists) {
         $error = "نام کاربری قبلا ثبت شده است.";
-    }
-
-    if (!$error && !preg_match('/^[a-zA-Z0-9._%+-]+@gmail\.com$/', $email)) {
+    } elseif (!preg_match('/^[a-zA-Z0-9._%+-]+@gmail\.com$/', $email)) {
         $error = "ایمیل باید یک Gmail معتبر باشد.";
-    }
-
-    if (!$error && $password !== $password_repeat) {
+    } elseif ($password !== $password_repeat) {
         $error = "رمز عبور و تکرار آن یکسان نیستند.";
-    }
-
-    if (!$error) {
+    } else {
         if (createUser($username, $password, $email)) {
-            $user = getUserByUsername($username);
-            $_SESSION['id'] = $user['id'];
+            $_SESSION['id'] = getUserByUsername($username)['id'];
             header("Location: profile.php");
             exit;
         } else {
