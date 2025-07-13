@@ -2,23 +2,16 @@
 require_once __DIR__ . '/../includes/bootstrap.php';
 $pageTitle = "ویرا - سبد خرید";
 
-if (!isset($_SESSION['id'])) {
+if (empty($_SESSION['id'])) {
     header('Location: login.php');
     exit;
 }
 
-// Handle quantity increase/decrease and removal
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['remove_book_id'])) {
+    if (!empty($_POST['remove_book_id'])) {
         deleteFromCart($_POST['remove_book_id']);
-    } elseif (isset($_POST['change_quantity_book_id'], $_POST['change_quantity_action'])) {
-        $book_id = $_POST['change_quantity_book_id'];
-        $action = $_POST['change_quantity_action'];
-        if ($action === 'increase') {
-            changeCartQuantity($book_id, 1);
-        } elseif ($action === 'decrease') {
-            changeCartQuantity($book_id, -1);
-        }
+    } elseif (!empty($_POST['change_quantity_book_id']) && !empty($_POST['change_quantity_action'])) {
+        changeCartQuantity($_POST['change_quantity_book_id'], $_POST['change_quantity_action'] === 'increase' ? 1 : -1);
     }
 }
 
