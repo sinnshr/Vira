@@ -11,5 +11,6 @@
         </a>
     </div>
     <p class="my-3">کلیه حقوق محفوظ است &copy; ۲۰۲۵ کتاب‌سرای ویرا</p>
-    <p>طراحی شده توسط <a href="https://github.com/sinnshr" class="text-amber-300 m-1">sinnshr<i class="fa-brands fa-github fa-xl m-2"></i></a></p>
+    <p>طراحی شده توسط <a href="https://github.com/sinnshr" class="text-amber-300 m-1">sinnshr<i
+                class="fa-brands fa-github fa-xl m-2"></i></a></p>
 </footer>

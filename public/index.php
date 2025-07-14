@@ -80,9 +80,11 @@ ob_start();
     </svg>
 </div>
 
-<section class="w-full py-10 px-2 sm:px-4 bg-[#FEFAE0] flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+<section
+    class="w-full py-10 px-2 sm:px-4 bg-[#FEFAE0] flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
     <div class="flex-1 w-full">
-        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-[#5F6F52] mx-1 px-2 sm:px-8 md:px-12">با ارسال نظر، به پیشرفت ما کمک کنید.</h2>
+        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-[#5F6F52] mx-1 px-2 sm:px-8 md:px-12">با ارسال نظر، به پیشرفت
+            ما کمک کنید.</h2>
         <form method="post" action="" class="w-full max-w-xl bg-[#A9B388] rounded-lg shadow p-4 sm:p-6 mb-6 mx-auto">
             <div class="mb-4">
                 <label class="block text-[#FEFAE0] mb-2" for="name">نام شما:</label>
@@ -116,7 +118,8 @@ ob_start();
         </form>
     </div>
     <div class="flex justify-center items-center w-full md:w-auto mt-4 md:mt-0">
-        <img src="/assets/img/comment.png" alt="comment" class="max-w-xs sm:max-w-md md:max-w-lg w-full h-auto" style="max-width:600px;">
+        <img src="/assets/img/comment.png" alt="comment" class="max-w-xs sm:max-w-md md:max-w-lg w-full h-auto"
+            style="max-width:600px;">
     </div>
 </section>
 
