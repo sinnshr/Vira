@@ -1,12 +1,10 @@
 <?php
 require_once __DIR__ . '/../includes/bootstrap.php';
 $pageTitle = "ویرا - جزئیات سفارش";
-
-if (!isset($_SESSION['id'])) {
+if (empty($_SESSION['id'])) {
     header('Location: login.php');
     exit;
 }
-
 $order_id = $_GET['id'] ?? null;
 $user_id = $_SESSION['id'];
 $order = getOrderDetails($order_id, $user_id);

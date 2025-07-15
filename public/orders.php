@@ -1,12 +1,10 @@
 <?php
 require_once __DIR__ . '/../includes/bootstrap.php';
 $pageTitle = "ویرا - تاریخچه سفارشات";
-
-if (!isset($_SESSION['id'])) {
+if (empty($_SESSION['id'])) {
     header('Location: login.php');
     exit;
 }
-
 $user_id = $_SESSION['id'];
 $orders = getUserOrders($user_id);
 
@@ -47,7 +45,8 @@ ob_start();
                                 </div>
                             </div>
                             <div>
-                                <a href="order_details.php?id=<?= $order['id'] ?>" class="inline-block rounded-lg px-5 py-1.5 font-border font-medium  text-white bg-[#4d6847] hover:bg-[#283925] shadow lg:mr-10">جزئیات...</a>
+                                <a href="order_details.php?id=<?= $order['id'] ?>"
+                                    class="inline-block rounded-lg px-5 py-1.5 font-border font-medium  text-white bg-[#4d6847] hover:bg-[#283925] shadow lg:mr-10">جزئیات...</a>
                             </div>
                         </div>
                     </div>
